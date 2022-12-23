@@ -5,3 +5,21 @@ services:
         volumes:
             - ./scripts/email:/scripts
         command: ./scripts/send_email.sh ${EMAIL_RECIPIENT}
+    db:
+        # Build ./docker/db/Dockerfile
+        build: ./docker/db
+        restart: always
+        volumes:
+            - dailyreport-mysql-data:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: secret
+
+    # db admin container for development (http://localhost:8080)
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8080:8080
+
+volumes:
+    dailyreport-mysql-data:
