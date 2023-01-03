@@ -15,6 +15,13 @@ services:
             - dailyreport-mysql-data:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: secret
+    ui:
+        # Build ./docker/ui/Dockerfile
+        build: ./docker/ui
+        restart: always
+        ports:
+            - 49151:8080
+        command: node server.js
 
 volumes:
     dailyreport-mysql-data:

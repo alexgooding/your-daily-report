@@ -1,0 +1,13 @@
+{
+  "name": "your_daily_report_web_app",
+  "version": "1.0.0",
+  "description": "Node.js web app for Your Daily Report",
+  "author": "Alex Gooding",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
