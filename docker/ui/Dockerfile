@@ -1,15 +1,19 @@
-FROM node:18.12.1
+FROM node:18.12.1 as base
 
 # Create app directory
 WORKDIR /usr/src/app
 
-# Install app dependencies
+FROM base as dev
+# Install app dependencies and nodemon for auto-restart when changes are detected
+COPY package*.json ./
+RUN npm install && \
+    npm install -g nodemon
+CMD ["nodemon", "server.js"]
+
+FROM base as prod
+# Install production app dependencies
 COPY package*.json ./
 RUN npm install --production
-
 # Bundle app source
 COPY . .
-
-EXPOSE 8080
-
 CMD ["node", "server.js"]
