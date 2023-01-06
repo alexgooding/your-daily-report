@@ -27,6 +27,7 @@ services:
         # Volume bind for continuous code updates
         volumes:
             - ./docker/ui:/usr/src/app
+            - /usr/src/app/node_modules
 
 volumes:
     dailyreport-mysql-data:

@@ -8,7 +8,7 @@ FROM base as dev
 COPY package*.json ./
 RUN npm install && \
     npm install -g nodemon
-CMD ["nodemon", "server.js"]
+CMD ["nodemon", "-L", "server.js"]
 
 FROM base as prod
 # Install production app dependencies
