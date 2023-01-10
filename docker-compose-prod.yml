@@ -15,10 +15,10 @@ services:
             - dailyreport-mysql-data:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: secret
-    ui:
-        # Build ./docker/ui/Dockerfile
+    app:
+        # Build ./docker/app/Dockerfile
         build:
-            context: ./docker/ui
+            context: ./docker/app
             dockerfile: Dockerfile
             target: prod
         restart: always
