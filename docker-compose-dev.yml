@@ -28,6 +28,19 @@ services:
         volumes:
             - ./docker/app:/usr/src/app
             - /usr/src/app/node_modules
+    ui:
+        # Build ./docker/ui/Dockerfile
+        build:
+            context: ./docker/ui
+            dockerfile: Dockerfile
+            target: dev
+        restart: always
+        ports:
+            - 4200:4200
+        # Volume bind for continuous code updates
+        volumes:
+            - ./docker/ui:/app
+            - /app/node_modules
 
 volumes:
     dailyreport-mysql-data:

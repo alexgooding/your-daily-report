@@ -24,6 +24,15 @@ services:
         restart: always
         ports:
             - 49151:8080
+    ui:
+        # Build ./docker/ui/Dockerfile
+        build:
+            context: ./docker/ui
+            dockerfile: Dockerfile
+            target: prod
+        restart: always
+        ports:
+            - 4200:4200
 
 volumes:
     dailyreport-mysql-data:
