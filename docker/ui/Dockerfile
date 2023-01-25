@@ -5,7 +5,7 @@ WORKDIR /app
 
 FROM base as dev
 # Install app dependencies
-COPY package*.json ./
+COPY ui/package*.json ./
 RUN npm install && \
     npm install -g @angular/cli
 # Serve the app
@@ -13,11 +13,11 @@ CMD ["ng", "serve", "--host", "0.0.0.0"]
 
 FROM base as prod-builder
 # Install app dependencies
-COPY package*.json ./
+COPY ui/package*.json ./
 RUN npm install && \
     npm install -g @angular/cli
 # Bundle app source
-COPY . .
+COPY ui/ .
 # Build production app
 RUN ng build
 

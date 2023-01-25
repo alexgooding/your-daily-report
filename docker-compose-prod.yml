@@ -1,13 +1,17 @@
 services:
     email:
         # Build ./docker/email/Dockerfile
-        build: ./docker/email
+        build: 
+            context: ./
+            dockerfile: ./docker/email/Dockerfile
         volumes:
-            - ./scripts/email:/scripts
+            - ./email:/scripts
         command: ./scripts/send_email.sh ${EMAIL_RECIPIENT}
     db:
         # Build ./docker/db/Dockerfile
-        build: ./docker/db
+        build: 
+            context: ./
+            dockerfile: ./docker/db/Dockerfile
         restart: always
         ports:
             - 3306:3306
@@ -15,11 +19,11 @@ services:
             - dailyreport-mysql-data:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: secret
-    app:
-        # Build ./docker/app/Dockerfile
+    api:
+        # Build ./docker/api/Dockerfile
         build:
-            context: ./docker/app
-            dockerfile: Dockerfile
+            context: ./
+            dockerfile: ./docker/apiDockerfile
             target: prod
         restart: always
         ports:
@@ -27,8 +31,8 @@ services:
     ui:
         # Build ./docker/ui/Dockerfile
         build:
-            context: ./docker/ui
-            dockerfile: Dockerfile
+            context: ./
+            dockerfile: ./docker/ui/Dockerfile
             target: prod
         restart: always
         ports:

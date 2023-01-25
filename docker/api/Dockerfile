@@ -5,15 +5,15 @@ WORKDIR /usr/src/app
 
 FROM base as dev
 # Install app dependencies and nodemon for auto-restart when changes are detected
-COPY package*.json ./
+COPY api/package*.json ./
 RUN npm install && \
     npm install -g nodemon
-CMD ["nodemon", "-L", "server.js"]
+CMD ["nodemon", "-L", "app.js"]
 
 FROM base as prod
 # Install production app dependencies
-COPY package*.json ./
+COPY api/package*.json ./
 RUN npm install --production
 # Bundle app source
-COPY . .
-CMD ["node", "server.js"]
+COPY api/ .
+CMD ["node", "app.js"]
